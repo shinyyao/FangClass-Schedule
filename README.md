@@ -44,4 +44,3 @@ GitHub 会直接显示 `.tex` 源码，方便多人审阅和提交 PR。若要�
 latexmk -xelatex main.tex
 ```
 
-或直接把仓库导入 Overleaf（Overleaf 支持 Git/GitHub 同步的账号可直接同步）。

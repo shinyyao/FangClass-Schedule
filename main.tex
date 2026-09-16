@@ -1,0 +1,101 @@
+\documentclass[UTF8,fontset=none]{ctexart}
+
+% Portable CJK font selection for Overleaf / macOS / Windows / Linux.
+% The first installed font in this list will be used automatically.
+\newcommand{\UseScheduleCJKFont}[1]{%
+  \setCJKmainfont{#1}%
+  \setCJKfamilyfont{schedulefang}{#1}%
+}
+\IfFontExistsTF{Noto Serif CJK SC}{
+  \UseScheduleCJKFont{Noto Serif CJK SC}
+}{
+  \IfFontExistsTF{Songti SC}{
+    \UseScheduleCJKFont{Songti SC}
+  }{
+    \IfFontExistsTF{STSong}{
+      \UseScheduleCJKFont{STSong}
+    }{
+      \IfFontExistsTF{SimSun}{
+        \UseScheduleCJKFont{SimSun}
+      }{
+        \IfFontExistsTF{Source Han Serif SC}{
+          \UseScheduleCJKFont{Source Han Serif SC}
+        }{
+          \UseScheduleCJKFont{FandolSong-Regular}
+        }
+      }
+    }
+  }
+}
+\newcommand{\fangsong}{\CJKfamily{schedulefang}}
+\usepackage[a4paper,landscape,left=8mm,right=8mm,top=8mm,bottom=8mm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{tabularx,array}
+\usepackage{needspace}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+
+\definecolor{scheduleblue}{HTML}{4472C4}
+\definecolor{schedulelight}{HTML}{B4C6E7}
+\definecolor{schedulepale}{HTML}{DDEBF7}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{2.2pt}
+\setlength{\arrayrulewidth}{0.45pt}
+\renewcommand{\arraystretch}{1.28}
+\setlength{\extrarowheight}{0.8pt}
+\emergencystretch=3em
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcommand{\ScheduleColSpec}{|C{1.65cm}|C{1.75cm}|Y|C{2.20cm}|C{1.70cm}|C{2.20cm}|C{1.80cm}|C{1.70cm}|}
+
+\newcommand{\ScheduleTitle}[1]{%
+  \begin{tabularx}{\textwidth}{|C{1.65cm}|C{1.75cm}|Y|C{2.20cm}|C{1.70cm}|C{2.20cm}|C{1.80cm}|C{1.70cm}|}
+  \multicolumn{8}{|c|}{\begin{minipage}[c][10mm][c]{0.975\textwidth}\centering\fangsong\bfseries\fontsize{14pt}{16pt}\selectfont #1\end{minipage}}\\\hline
+  \end{tabularx}\vspace{1.2mm}
+}
+
+\newcommand{\SessionTitle}[1]{%
+  \rowcolor{scheduleblue}\multicolumn{8}{|c|}{\begin{minipage}[c][9.5mm][c]{0.975\textwidth}\centering\color{white}\fangsong\bfseries\fontsize{8.7pt}{10.5pt}\selectfont #1\end{minipage}}\\\hline
+}
+\newcommand{\HeaderRow}{\bfseries 时间 & 报告人 & 题目 & 论文编号 & 辅导老师 & 质疑同学 & 提问老师 & 巡回点评 \\\hline}
+\newcommand{\HeaderRowOnsite}{\bfseries 时间 & 报告人 & 题目 & 论文编号 & 辅导老师 & 质疑同学 & 提问老师 & \bfseries 巡回点评\newline（现场） \\\hline}
+\newcommand{\ReportBlue}[8]{\rowcolor{schedulelight}#1 & #2 & #3 & #4 & #5 & #6 & #7 & #8 \\\hline}
+\newcommand{\ReportWhite}[8]{#1 & #2 & #3 & #4 & #5 & #6 & #7 & #8 \\\hline}
+\newcommand{\BreakRow}[2]{\rowcolor{schedulelight}#1 & \multicolumn{7}{c|}{#2} \\\hline}
+\newcommand{\BlockGap}{\vspace{2.2mm}}
+
+\newcommand{\DebateHeader}{%
+  \rowcolor{schedulepale}\bfseries 场次 & 序号 & 辩论环节 & \multicolumn{4}{c|}{参赛学生（正反方各4人）} & 点评老师 \\\hline
+}
+\newcommand{\DebateRow}[5]{#1 & #2 & #3 & \multicolumn{4}{c|}{#4} & #5 \\\hline}
+
+
+
+\begin{document}
+
+% 第1页
+\includepdf[
+  pages=1,
+  fitpaper=true,
+  pagecommand={}
+]{课表目录.pdf}
+
+\fangsong\fontsize{7.2pt}{9.2pt}\selectfont
+
+% 第2-4页
+\input{schedule-data1.tex}
+
+% 第5页
+\includepdf[
+  pages=2,
+  fitpaper=true,
+  pagecommand={}
+]{课表目录.pdf}
+
+% 第6页开始
+\input{schedule-data2.tex}
+
+\end{document}
