@@ -1,3 +1,4 @@
+# 2026年秋学期南信大方班实验班课程表（LaTeX 版）
 # Fall 2026 Course Schedule for the NUIST Fang Class 
 
 Copyright @Xuan Yao
