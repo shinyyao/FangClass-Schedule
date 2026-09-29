@@ -52,5 +52,3 @@ To generate the PDF locally, install TeX Live and run:
 ```bash
 latexmk -xelatex main.tex
 ```
-
-
